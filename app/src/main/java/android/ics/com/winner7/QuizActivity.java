@@ -8,6 +8,7 @@ import android.ics.com.winner7.Parsing_Quiz.Quiz;
 import android.ics.com.winner7.Utils.Connectivity;
 import android.ics.com.winner7.Utils.HttpHandler;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -30,10 +31,19 @@ public class QuizActivity extends AppCompatActivity {
    static int  counter=0;
    TextView tv_quiz_prev,tv_quiz_next;
    TextView questxt;
+    TextView ttxp;
+    int time = 10;
     RelativeLayout rl_ans1,rl_ans2,rl_ans3,rl_ans4;
     TextView tv_quiz_subject, tv_quiz_ans1, tv_quiz_ans2, tv_quiz_ans3, tv_quiz_ans4, tv_quiz_ans5, tv_quiz_ans6;
     String myans1 ,myans2,myans3,myans4 ,myans;
     LinkedList<Quiz> quizLinkedList = new LinkedList<>();
+
+    @Override
+    public void onBackPressed() {
+        counter=0;
+        quizLinkedList.clear();
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,7 @@ public class QuizActivity extends AppCompatActivity {
 
         tv_quiz_subject = (TextView) findViewById(R.id.tv_quiz_subject);
         questxt = (TextView) findViewById(R.id.questxt);
+        ttxp = (TextView) findViewById(R.id.ttxp);
         tv_quiz_ans1 = (TextView) findViewById(R.id.tv_quiz_ans1);
         tv_quiz_ans2 = (TextView) findViewById(R.id.tv_quiz_ans2);
         tv_quiz_ans3 = (TextView) findViewById(R.id.tv_quiz_ans3);
@@ -55,6 +66,22 @@ public class QuizActivity extends AppCompatActivity {
         rl_ans2 = (RelativeLayout)findViewById(R.id.rl_ans2);
         rl_ans3 = (RelativeLayout)findViewById(R.id.rl_ans3);
         rl_ans4 = (RelativeLayout)findViewById(R.id.rl_ans4);
+
+        new CountDownTimer(10000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                ttxp.setText("0:" + checkDigit(time));
+                time--;
+            }
+
+            public void onFinish() {
+          //      linTest.setVisibility(View.VISIBLE);
+                //  ttt.setText("try again");
+            }
+
+        }.start();
+
+
         rl_ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,33 +141,246 @@ public class QuizActivity extends AppCompatActivity {
         tv_quiz_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("counterwa" , ""+counter);
+              //  quizLinkedList.add(new Quiz(id,Que,Ans_1,Ans_2,Ans_3 ,Ans_4,Ans,marks,Createdate,status ,myans));
                 try {
                     quizLinkedList.get(counter).setMyeans(myans);
-                    counter++;
+                    try {
+                        String mynextans = quizLinkedList.get(1 + counter).getMyeans().toString();
+                        if (quizLinkedList.get(1 + counter).getMyeans().toString().length() != 0) {
+                            if(mynextans.equals("A"))
+                            {
+                                counter++;
+                                rl_ans1.setBackgroundColor(Color.GREEN);
+                                //    rl_ans4.setBackgroundColor(Color.GRAY);
+                                rl_ans2.setBackgroundColor(Color.GRAY);
+                                rl_ans3.setBackgroundColor(Color.GRAY);
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at "+counter);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }else if(mynextans.equals("B"))
+                            {
+                                counter++;
+                                rl_ans2.setBackgroundColor(Color.GREEN);
+                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+                                rl_ans3.setBackgroundColor(Color.GRAY);
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at "+counter);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }else if(mynextans.equals("C"))
+                            {
+                                counter++;
+                                rl_ans3.setBackgroundColor(Color.GREEN);
+                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans2.setBackgroundColor(Color.GRAY);
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at "+counter);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }else if(mynextans.equals("D"))
+                            {
+                                counter++;
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+                                rl_ans1.setBackgroundColor(Color.GREEN);
+                                rl_ans2.setBackgroundColor(Color.GREEN);
+                                rl_ans3.setBackgroundColor(Color.GREEN);
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at "+counter);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }else {
+                                counter++;
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans2.setBackgroundColor(Color.GRAY);
+                                rl_ans3.setBackgroundColor(Color.GRAY);
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at "+counter);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }
+                        }else {
+                            Toast.makeText(QuizActivity.this, "they are not", Toast.LENGTH_SHORT).show();
+
+                            counter++;
+                            rl_ans4.setBackgroundColor(Color.GRAY);
+                            rl_ans1.setBackgroundColor(Color.GRAY);
+                            rl_ans2.setBackgroundColor(Color.GRAY);
+                            rl_ans3.setBackgroundColor(Color.GRAY);
+                            tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                            questxt.setText("You are at "+counter);
+                            tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                            tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                            tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                            tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                        }
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                        counter++;
+                        rl_ans4.setBackgroundColor(Color.GRAY);
+                        rl_ans1.setBackgroundColor(Color.GRAY);
+                        rl_ans2.setBackgroundColor(Color.GRAY);
+                        rl_ans3.setBackgroundColor(Color.GRAY);
+                        tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                        questxt.setText("You are at "+counter);
+                        tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                        tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                        tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                        tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+
+                    }
+
                 }catch (Exception e)
                 {
                     e.printStackTrace();
-                    counter =0;
+
+
+                    try {
+                        rl_ans4.setBackgroundColor(Color.GRAY);
+                        rl_ans1.setBackgroundColor(Color.GRAY);
+                        rl_ans2.setBackgroundColor(Color.GRAY);
+                        rl_ans3.setBackgroundColor(Color.GRAY);
+                        tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                        questxt.setText("You are at "+counter);
+                        tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                        tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                        tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                        tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                    }catch (Exception Ex)
+                    {
+                        Ex.printStackTrace();
+//                        counter =0;
+                        Toast.makeText(QuizActivity.this, "THat was last question", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+             //  new  GetQuizQuestions(myans).execute();
 
-              //  quizLinkedList.add(new Quiz(id,Que,Ans_1,Ans_2,Ans_3 ,Ans_4,Ans,marks,Createdate,status ,myans));
 
-               new  GetQuizQuestions(myans).execute();
-                rl_ans4.setBackgroundColor(Color.GRAY);
-                rl_ans1.setBackgroundColor(Color.GRAY);
-                rl_ans2.setBackgroundColor(Color.GRAY);
-                rl_ans3.setBackgroundColor(Color.GRAY);
             }
         });
         tv_quiz_prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter--;
-                new  GetQuizQuestions(myans).execute();
-                rl_ans4.setBackgroundColor(Color.GRAY);
-                rl_ans1.setBackgroundColor(Color.GRAY);
-                rl_ans2.setBackgroundColor(Color.GRAY);
-                rl_ans3.setBackgroundColor(Color.GRAY);
+              //  new  GetQuizQuestions(myans).execute();
+                try {
+                    Log.e("counterwa" , ""+counter);
+                    int coun3 = counter-1;
+                    String mynextans = quizLinkedList.get(coun3).getMyeans().toString();
+                    if (quizLinkedList.get(coun3).getMyeans().toString().length() != 0) {
+                        if(mynextans.equals("A"))
+                        {
+                            if(counter !=0) {
+                                counter--;
+                                rl_ans1.setBackgroundColor(Color.GREEN);
+                                rl_ans2.setBackgroundColor(Color.GRAY);
+                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at " + counter);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }else {
+                                Toast.makeText(QuizActivity.this, "you reachead first", Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(mynextans.equals("B"))
+                        {
+                            if(counter !=0) {
+                                counter--;
+                                rl_ans2.setBackgroundColor(Color.GREEN);
+                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans3.setBackgroundColor(Color.GRAY);
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at " + counter);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }else {
+                                Toast.makeText(QuizActivity.this, "You are at first", Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(mynextans.equals("C"))
+                        {
+                            if(counter !=0) {
+                                counter--;
+                                rl_ans3.setBackgroundColor(Color.GREEN);
+                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans2.setBackgroundColor(Color.GRAY);
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+
+
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at " + coun3);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }else {
+                                Toast.makeText(QuizActivity.this, "fisrt", Toast.LENGTH_SHORT).show();
+                            }
+                        }else if(mynextans.equals("D"))
+                        {
+                            if(counter !=0) {
+                                counter--;
+                                rl_ans4.setBackgroundColor(Color.GREEN);
+                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans2.setBackgroundColor(Color.GRAY);
+                                rl_ans3.setBackgroundColor(Color.GRAY);
+
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at " + coun3);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }else {
+                                Toast.makeText(QuizActivity.this, "at fisrt", Toast.LENGTH_SHORT).show();
+                            }
+                        }else {
+                            if(counter !=0) {
+                                counter--;
+                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans2.setBackgroundColor(Color.GRAY);
+                                rl_ans3.setBackgroundColor(Color.GRAY);
+                                rl_ans4.setBackgroundColor(Color.GRAY);
+
+                                tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                questxt.setText("You are at " + coun3);
+                                tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+                                tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+                                tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+                                tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                            }
+                        }
+                    }
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    counter =0;
+                }
+//                rl_ans4.setBackgroundColor(Color.GRAY);
+
             }
         });
 
@@ -150,7 +390,9 @@ public class QuizActivity extends AppCompatActivity {
             Toast.makeText(this, "No Internet", Toast.LENGTH_SHORT).show();
         }
     }
-
+    public String checkDigit(int number) {
+        return number <= 9 ? "0" + number : String.valueOf(number);
+    }
     //------------------------------------------
 
     class GetQuizQuestions extends AsyncTask<String, String, String> {
@@ -198,7 +440,8 @@ public class QuizActivity extends AppCompatActivity {
                     if (responce.equals("true")) {
                         JSONArray data_array = obj.getJSONArray("data");
                         for (int i = 0; i < data_array.length(); i++) {
-                            if(counter >=0 && counter<=data_array.length() && counter==i) {
+//                            if(counter >=0 && counter<=data_array.length() && counter==i) {
+
                                 JSONObject c = data_array.getJSONObject(i);
                                 String id = c.getString("id");
                                 String Que = c.getString("Que");
@@ -211,21 +454,25 @@ public class QuizActivity extends AppCompatActivity {
                                 String Createdate = c.getString("Createdate");
                                 String status = c.getString("status");
                                 quizLinkedList.add(new Quiz(id,Que,Ans_1,Ans_2,Ans_3 ,Ans_4,Ans,marks,Createdate,status ,myans));
-                                tv_quiz_subject.setText(Que);
-                                questxt.setText("You are at "+counter);
-                                tv_quiz_ans1.setText(Ans_1);
-                                tv_quiz_ans2.setText(Ans_2);
-                                tv_quiz_ans3.setText(Ans_3);
-                                tv_quiz_ans4.setText(Ans_4);
-                                if(myans.equals(Ans))
-                                {
-                                    Toast.makeText(QuizActivity.this, "Right ans", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(QuizActivity.this, "Wrong ans", Toast.LENGTH_SHORT).show();
+                                Log.e("quizLinkedList" , ""+quizLinkedList.get(i).getAns());
+                                if(i==0) {
+                                    tv_quiz_subject.setText(Que);
+                                    questxt.setText("You are at " + counter);
+                                    tv_quiz_ans1.setText(Ans_1);
+                                    tv_quiz_ans2.setText(Ans_2);
+                                    tv_quiz_ans3.setText(Ans_3);
+                                    tv_quiz_ans4.setText(Ans_4);
                                 }
+//                                if(myans.equals(Ans))
+//                                {
+//                                    Toast.makeText(QuizActivity.this, "Right ans", Toast.LENGTH_SHORT).show();
+//                                }else {
+//                                    Toast.makeText(QuizActivity.this, "Wrong ans", Toast.LENGTH_SHORT).show();
+//                                }
                                /*     tv_quiz_ans5.setText();
                             tv_quiz_ans6.setText();*/
-                            }else {
+//                            }
+                            else {
                                 Toast.makeText(QuizActivity.this, "LAst Question", Toast.LENGTH_SHORT).show();
 //                                counter=0;
                             }
