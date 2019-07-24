@@ -252,11 +252,12 @@ public class QuizActivity extends AppCompatActivity {
 
 
                     try {
+                        tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
                         rl_ans4.setBackgroundColor(Color.GRAY);
                         rl_ans1.setBackgroundColor(Color.GRAY);
                         rl_ans2.setBackgroundColor(Color.GRAY);
                         rl_ans3.setBackgroundColor(Color.GRAY);
-                        tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+
                         questxt.setText("You are at "+counter);
                         tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
                         tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
@@ -290,16 +291,20 @@ public class QuizActivity extends AppCompatActivity {
                                 counter--;
                                 rl_ans1.setBackgroundColor(Color.GREEN);
                                 rl_ans2.setBackgroundColor(Color.GRAY);
-                                rl_ans1.setBackgroundColor(Color.GRAY);
+                                rl_ans3.setBackgroundColor(Color.GRAY);
                                 rl_ans4.setBackgroundColor(Color.GRAY);
 
                                 tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+                                String sx = quizLinkedList.get(counter).getQue();
+                                Log.e("question " , ""+quizLinkedList.get(counter).getQue());
                                 questxt.setText("You are at " + counter);
                                 tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
                                 tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
                                 tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
                                 tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+
                             }else {
+//                                counter =0;
                                 Toast.makeText(QuizActivity.this, "you reachead first", Toast.LENGTH_SHORT).show();
                             }
                         }else if(mynextans.equals("B"))
@@ -377,6 +382,7 @@ public class QuizActivity extends AppCompatActivity {
                 }catch (Exception e)
                 {
                     e.printStackTrace();
+                    Toast.makeText(QuizActivity.this, "You are at first", Toast.LENGTH_SHORT).show();
                     counter =0;
                 }
 //                rl_ans4.setBackgroundColor(Color.GRAY);
