@@ -11,6 +11,7 @@ import android.ics.com.winner7.Utils.Connectivity;
 import android.ics.com.winner7.Utils.HttpHandler;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -34,9 +35,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -57,7 +61,9 @@ public class QuizActivity extends AppCompatActivity {
     TextView tv_quiz_subject, tv_quiz_ans1, tv_quiz_ans2, tv_quiz_ans3, tv_quiz_ans4, tv_quiz_ans5, tv_quiz_ans6;
     String myans1 ,myans2,myans3,myans4 ,myans;
     LinkedList<Quiz> quizLinkedList = new LinkedList<>();
-
+    private Handler handler;
+    String currentTime;
+    Runnable r;
     @Override
     public void onBackPressed() {
         counter=0;
@@ -87,19 +93,22 @@ public class QuizActivity extends AppCompatActivity {
         rl_ans2 = (RelativeLayout)findViewById(R.id.rl_ans2);
         rl_ans3 = (RelativeLayout)findViewById(R.id.rl_ans3);
         rl_ans4 = (RelativeLayout)findViewById(R.id.rl_ans4);
+        handler = new Handler();
+
+
         sumtxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(int i=0;i<quizLinkedList.size();i++) {
                     String ansss = quizLinkedList.get(i).getAns();
                     String myansx = quizLinkedList.get(i).getMyeans();
-                    if(quizLinkedList.get(i).getAns().equals(quizLinkedList.get(i).getMyeans()))
+                    if(myansx.equals(ansss))
                     {
                         totalmarks = Integer.valueOf(quizLinkedList.get(i).getMarks()) + totalmarks;
                         rightcount++;
                         attempted++;
                     }else {
-                        if(quizLinkedList.get(i).getMyeans().equals("200"))
+                        if(myansx.equals("200"))
                         {
                             unattempted++;
                         }else {
@@ -139,6 +148,7 @@ public class QuizActivity extends AppCompatActivity {
                 myans2 = "X";
                 myans3 = "X";
                 myans4 = "X";
+                quizLinkedList.get(counter).setMyeans("1");
             }
         }); rl_ans2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +162,7 @@ public class QuizActivity extends AppCompatActivity {
                 myans1 = "X";
                 myans3 = "X";
                 myans4 = "X";
+                quizLinkedList.get(counter).setMyeans("2");
             }
         }); rl_ans3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +178,7 @@ public class QuizActivity extends AppCompatActivity {
                 myans1 = "X";
                 myans2 = "X";
                 myans4 = "X";
+                quizLinkedList.get(counter).setMyeans("3");
             }
         }); rl_ans4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +192,7 @@ public class QuizActivity extends AppCompatActivity {
                 myans1 = "X";
                 myans2 = "X";
                 myans3 = "X";
+                quizLinkedList.get(counter).setMyeans("4");
             }
         });
 
@@ -285,17 +298,25 @@ public class QuizActivity extends AppCompatActivity {
                     }catch (Exception e)
                     {
                         e.printStackTrace();
-                        counter++;
-                        rl_ans4.setBackgroundColor(Color.GRAY);
-                        rl_ans1.setBackgroundColor(Color.GRAY);
-                        rl_ans2.setBackgroundColor(Color.GRAY);
-                        rl_ans3.setBackgroundColor(Color.GRAY);
-                        tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
-                        questxt.setText("You are at "+counter);
-                        tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
-                        tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
-                        tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
-                        tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
+                        sumtxt.setVisibility(View.VISIBLE);
+                        if(!myans.equals("200")) {
+                            quizLinkedList.get(counter-1).setMyeans(myans);
+                        }else {
+                            quizLinkedList.get(counter-1).setMyeans("200");
+                        }
+//                        counter =0;
+                        Toast.makeText(QuizActivity.this, "THat was last question", Toast.LENGTH_SHORT).show();
+//                        counter++;
+//                        rl_ans4.setBackgroundColor(Color.GRAY);
+//                        rl_ans1.setBackgroundColor(Color.GRAY);
+//                        rl_ans2.setBackgroundColor(Color.GRAY);
+//                        rl_ans3.setBackgroundColor(Color.GRAY);
+//                        tv_quiz_subject.setText(quizLinkedList.get(counter).getQue());
+//                        questxt.setText("You are at "+counter);
+//                        tv_quiz_ans1.setText(quizLinkedList.get(counter).getAns1());
+//                        tv_quiz_ans2.setText(quizLinkedList.get(counter).getAns2());
+//                        tv_quiz_ans3.setText(quizLinkedList.get(counter).getAns3());
+//                        tv_quiz_ans4.setText(quizLinkedList.get(counter).getAns4());
 
                     }
 
@@ -320,7 +341,7 @@ public class QuizActivity extends AppCompatActivity {
                     {
                         Ex.printStackTrace();
                         sumtxt.setVisibility(View.VISIBLE);
-                        if(myans.length() ==0) {
+                        if(!myans.equals("200")) {
                             quizLinkedList.get(counter-1).setMyeans(myans);
                         }else {
                             quizLinkedList.get(counter-1).setMyeans("200");
@@ -450,7 +471,7 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         if (Connectivity.isNetworkAvailable(QuizActivity.this)) {
-            new GetQuizQuestions("").execute();
+            new GetQuizQuestions("200").execute();
         } else {
             Toast.makeText(this, "No Internet", Toast.LENGTH_SHORT).show();
         }
@@ -483,7 +504,7 @@ public class QuizActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             try {
-                server_url = "http://ihisaab.in/winnerseven/api/getquiz";
+                server_url = "https://winner7quiz.com/api/getquiz";
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -518,7 +539,8 @@ public class QuizActivity extends AppCompatActivity {
                                 String marks = c.getString("marks");
                                 String Createdate = c.getString("Createdate");
                                 String status = c.getString("status");
-                                quizLinkedList.add(new Quiz(id,Que,Ans_1,Ans_2,Ans_3 ,Ans_4,Ans,marks,Createdate,status ,myans));
+                                String endtime = c.getString("endtime");
+                                quizLinkedList.add(new Quiz(id,Que,Ans_1,Ans_2,Ans_3 ,Ans_4,Ans,marks,Createdate,status ,myans,endtime));
                                 Log.e("quizLinkedList" , ""+quizLinkedList.get(i).getAns());
                                 if(i==0) {
                                     tv_quiz_subject.setText(Que);
@@ -541,6 +563,32 @@ public class QuizActivity extends AppCompatActivity {
                                 Toast.makeText(QuizActivity.this, "LAst Question", Toast.LENGTH_SHORT).show();
 //                                counter=0;
                             }
+                        }
+                        try {
+                            String endtime = quizLinkedList.get(0).getEndtime();
+                              r = new Runnable() {
+                                public void run() {
+                                    currentTime = new SimpleDateFormat("HH:mm aa", Locale.getDefault()).format(new Date());
+                                    int currentval = Integer.valueOf(currentTime.substring(3, 5));
+                                    int endtimeval = Integer.valueOf(endtime.substring(3, 5));
+                                    if (currentval > endtimeval) {
+                                        Log.e("They", "are not equal"+currentTime+""+endtimeval);
+                                        finish();
+                                        handler.removeCallbacks(r);
+                                    } else {
+                                        Log.e("They", "are not equal"+currentTime+""+endtimeval);
+                                        Log.e("they", "equal");
+                                    }
+                                    //  tv.append("Hello World");
+//                if(currentTime.equals())
+                                    handler.postDelayed(this, 1000);
+                                }
+                            };
+
+                            handler.postDelayed(r, 1000);
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
                         }
                     } else {
                         Toast.makeText(QuizActivity.this, "Some Problem!", Toast.LENGTH_SHORT).show();
@@ -585,7 +633,7 @@ public class QuizActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("http://ihisaab.in/winnerseven/api/addResult");
+                URL url = new URL("https://winner7quiz.com/api/addResult");
 
 
                 JSONObject postDataParams = new JSONObject();
@@ -600,6 +648,7 @@ public class QuizActivity extends AppCompatActivity {
                 postDataParams.put("unattempted", unattempted);
                 postDataParams.put("rigth", rightcount);
                 postDataParams.put("wrong", wrongcount);
+                postDataParams.put("quiztime", Calendar.getInstance().getTime().getHours());
 
 
                 Log.e("postDataParams", postDataParams.toString());
@@ -673,8 +722,11 @@ public class QuizActivity extends AppCompatActivity {
                     String responce = jsonObject.getString("responce");
                     if(responce.equals("true"))
                     {
+                        handler.removeCallbacks(r);
                         Intent intent = new Intent(QuizActivity.this , QuizResultActivity.class);
+                        intent.putExtra("endtime" , quizLinkedList.get(0).getEndtime());
                         startActivity(intent);
+
                         finish();
                     }
 //                    JSONObject object = jsonObject.getJSONObject("massage");

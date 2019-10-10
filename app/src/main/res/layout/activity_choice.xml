@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
+
     tools:context=".ChoiceActivity">
 
     <RelativeLayout
@@ -52,7 +52,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:textColor="#fff"
+            android:textColor="#000"
             android:gravity="center"
             android:layout_marginBottom="20dp"
             android:textSize="18dp"
@@ -66,7 +66,7 @@
             android:id="@+id/bt_user"
             android:text="User"
             android:textAllCaps="false"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:layout_marginBottom="20dp"
             android:background="@drawable/button_selector_app"
             android:layout_width="match_parent"
@@ -76,7 +76,7 @@
             android:id="@+id/bt_vender"
             android:text="Become a Partner"
             android:textAllCaps="false"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:background="@drawable/button_selector_app"
             android:layout_width="match_parent"
             android:layout_height="45dp" />

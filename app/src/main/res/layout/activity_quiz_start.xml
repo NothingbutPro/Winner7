@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
+
     android:orientation="vertical"
     tools:context=".QuizStartActivity">
 
@@ -61,14 +61,14 @@
 
             <TextView
                 android:text="Instions : "
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:text="Number the steps in your test, and make use of sub-lists"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="22dp" />
         </LinearLayout>
 
@@ -106,7 +106,7 @@
                 android:id="@+id/strTest"
                 android:text="Start Test"
                 android:textAllCaps="false"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:background="@drawable/button_selector_app"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

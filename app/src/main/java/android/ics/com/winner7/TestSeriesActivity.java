@@ -65,7 +65,7 @@ public class TestSeriesActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             try {
-                server_url = "http://ihisaab.in/winnerseven/api/getpdf";
+                server_url = "https://winner7quiz.com/api/getpdf";
             } catch (Exception e) {
                 e.printStackTrace();
             }

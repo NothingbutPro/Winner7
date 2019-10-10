@@ -64,7 +64,7 @@ public class ListPriceActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             try {
-                server_url = "http://ihisaab.in/winnerseven/api/getwinnerprice";
+                server_url = "https://winner7quiz.com/api/getwinnerprice";
             } catch (Exception e) {
                 e.printStackTrace();
             }

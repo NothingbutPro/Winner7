@@ -74,7 +74,7 @@ public class ForgetActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("http://ihisaab.in/winnerseven/api/forgetpassword");
+                URL url = new URL("https://winner7quiz.com/api/forgetpassword");
 
                 JSONObject postDataParams = new JSONObject();
                 postDataParams.put("mobile", EtMobF);

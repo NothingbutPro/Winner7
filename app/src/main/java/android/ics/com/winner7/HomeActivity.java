@@ -2,6 +2,8 @@ package android.ics.com.winner7;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.ics.com.winner7.KotlinActivities.LatestWinners;
+import android.ics.com.winner7.KotlinActivities.WinnerHistoryActivity;
 import android.ics.com.winner7.Utils.AppPreference;
 import android.ics.com.winner7.Utils.Connectivity;
 import android.ics.com.winner7.Utils.HttpHandler;
@@ -98,7 +100,7 @@ public class HomeActivity extends AppCompatActivity
         tstDate = (TextView) findViewById(R.id.tstDate);
         tstTime = (TextView) findViewById(R.id.tstTime);
         peoName = (TextView) findViewById(R.id.peoName);
-        volet = (LinearLayout) findViewById(R.id.volet);
+        volet = (LinearLayout) findViewById(R.id.walletli);
         upcomming = (LinearLayout) findViewById(R.id.upcomming);
         linear1 = (LinearLayout) findViewById(R.id.linear1);
         linear2 = (LinearLayout) findViewById(R.id.linear2);
@@ -148,13 +150,16 @@ public class HomeActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, WinnerHistoryActivity.class);
                 startActivity(intent);
+//                val intent = Intent(v.getContext(), WinnerHistoryActivity::class.java)
+//                startActivity(Intent(this, WinnerHistoryActivity::class.java))
+//                startActivity(intent);
             }
         });
 
         bt_latest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, WinnerHistoryActivity.class);
+                Intent intent = new Intent(HomeActivity.this, LatestWinners.class);
                 startActivity(intent);
             }
         });
@@ -311,14 +316,14 @@ public class HomeActivity extends AppCompatActivity
 
             try {
 
-                URL url = new URL("http://ihisaab.in/winnerseven/api/getamountuser");
+                URL url = new URL("https://winner7quiz.com/api/getamountuser");
 
 
                 JSONObject postDataParams = new JSONObject();
                 postDataParams.put("user_id", AppPreference.getId(HomeActivity.this));
 
 
-                Log.e("postDataParams", postDataParams.toString());
+                Log.e("postDataParamsgetamount", postDataParams.toString());
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(15000 /* milliseconds*/);
@@ -382,7 +387,7 @@ public class HomeActivity extends AppCompatActivity
                 dialog.dismiss();
 
                 // JSONObject jsonObject = null;
-                Log.e("SendJsonDataToServer>>>", result.toString());
+                Log.e("HomeJsonDataToServer>>>", result.toString());
                 try {
 
                     JSONObject jsonObject = new JSONObject(result);
@@ -392,10 +397,14 @@ public class HomeActivity extends AppCompatActivity
                     //     amountTxt1.setText(massage);
 
                     if (responce.equalsIgnoreCase("true")) {
-                    } else {
+
+                    }
+                    else {
+
                     }
 
                 } catch (JSONException e) {
+                    Toast.makeText(HomeActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
@@ -448,7 +457,7 @@ public class HomeActivity extends AppCompatActivity
         protected String doInBackground(String... params) {
 
             try {
-                server_url = "http://ihisaab.in/winnerseven/api/getquiztime";
+                server_url = "https://winner7quiz.com/api/getquiztime";
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -510,7 +519,7 @@ public class HomeActivity extends AppCompatActivity
         protected String doInBackground(String... params) {
 
             try {
-                server_url = "http://ihisaab.in/winnerseven/api/getuserdetails?user_id=" + AppPreference.getId(HomeActivity.this);
+                server_url = "https://winner7quiz.com/api/getuserdetails?user_id=" + AppPreference.getId(HomeActivity.this);
             } catch (Exception e) {
                 e.printStackTrace();
             }

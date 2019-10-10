@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("http://ihisaab.in/winnerseven/api/login");
+                URL url = new URL("https://winner7quiz.com/api/login");
 
 
                 JSONObject postDataParams = new JSONObject();

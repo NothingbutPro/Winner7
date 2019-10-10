@@ -307,7 +307,7 @@ public class ProfileActivity extends AppCompatActivity {
                 entity.addPart("profile_image", new FileBody(Image));
 
 
-                result = Utilities.postEntityAndFindJson("http://ihisaab.in/winnerseven/api/updateprofile", entity);
+                result = Utilities.postEntityAndFindJson("https://winner7quiz.com/api/updateprofile", entity);
 
                 return result;
 
@@ -481,7 +481,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("http://ihisaab.in/winnerseven/api/updateinfo");
+                URL url = new URL("https://winner7quiz.com/api/updateinfo");
 
                 JSONObject postDataParams = new JSONObject();
                 postDataParams.put("user_id", AppPreference.getId(ProfileActivity.this));
@@ -614,7 +614,7 @@ public class ProfileActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             try {
-                server_url = "http://ihisaab.in/winnerseven/api/getuserdetails?user_id=" + AppPreference.getId(ProfileActivity.this);
+                server_url = "https://winner7quiz.com/api/getuserdetails?user_id=" + AppPreference.getId(ProfileActivity.this);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -207,7 +207,7 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
 
             try {
 
-                URL url = new URL("http://ihisaab.in/winnerseven/api/otpmatch");
+                URL url = new URL("https://winner7quiz.com/api/otpmatch");
 
 
                 JSONObject postDataParams = new JSONObject();

@@ -5,7 +5,7 @@
     android:id="@+id/activity_forgot_pass"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
+
     android:orientation="vertical">
 
     <RelativeLayout
@@ -66,7 +66,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:text="Verification code will be sent to"
-            android:textColor="#fff" />
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/tvMobile"
@@ -76,7 +76,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text=""
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="16sp" />
 
         <View

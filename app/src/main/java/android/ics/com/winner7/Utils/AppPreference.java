@@ -2,6 +2,10 @@ package android.ics.com.winner7.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.ics.com.winner7.KotlinActivities.WinnerHistoryActivity;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class AppPreference {
@@ -95,5 +99,6 @@ public class AppPreference {
     public boolean isLoggedIn() {
         return prefs.getBoolean(IS_LOGIN, false);
     }
+
 
 }

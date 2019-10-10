@@ -26,7 +26,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Amount"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="11dp" />
 
             <TextView
@@ -58,7 +58,7 @@
                 android:background="@drawable/button_selector_app"
                 android:text="Request for payment"
                 android:textAllCaps="false"
-                android:textColor="#fff" />
+                android:textColor="#000" />
 
         </LinearLayout>
 
@@ -81,8 +81,8 @@
                 android:gravity="center"
                 android:hint="Fill Payment"
                 android:inputType="number"
-                android:textColor="#fff"
-                android:textColorHint="#fff"
+                android:textColor="#000"
+                android:textColorHint="#343a40"
                 android:textSize="13dp" />
 
         </LinearLayout>
@@ -106,7 +106,7 @@
                 android:background="@drawable/button_selector_app"
                 android:text="Ok"
                 android:textAllCaps="false"
-                android:textColor="#fff" />
+                android:textColor="#000" />
 
         </LinearLayout>
 

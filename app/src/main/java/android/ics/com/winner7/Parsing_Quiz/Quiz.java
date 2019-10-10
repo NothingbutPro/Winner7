@@ -23,6 +23,16 @@ public class Quiz {
     private String status;
     private  String myeans;
 
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
+
+    private  String endtime;
+
     public String getMyeans() {
         return myeans;
     }
@@ -33,7 +43,8 @@ public class Quiz {
 
 
 
-    public Quiz(String id, String que, String ans1, String ans2, String ans3, String ans4, String ans, String marks, String createdate, String status ,String myeans) {
+    public Quiz(String id, String que, String ans1, String ans2, String ans3, String ans4, String ans, String marks, String createdate, String status ,String myeans
+    ,String endtime) {
         this.id = id;
         this.que = que;
         this.ans1 = ans1;
@@ -45,6 +56,7 @@ public class Quiz {
         this.createdate = createdate;
         this.status = status;
         this.myeans = myeans;
+        this.endtime = endtime;
     }
 
     public String getId() {

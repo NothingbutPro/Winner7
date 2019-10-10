@@ -67,7 +67,7 @@ public class RefferUserActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("http://ihisaab.in/winnerseven/api/getuserrefferby");
+                URL url = new URL("https://winner7quiz.com/api/getuserrefferby");
 
                 JSONObject postDataParams = new JSONObject();
                 postDataParams.put("user_id", AppPreference.getId(RefferUserActivity.this));

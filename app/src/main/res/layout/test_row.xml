@@ -71,7 +71,7 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="View"
-                    android:textColor="#fff" />
+                    android:textColor="#000" />
 
                 <TextView
                     android:id="@+id/tv_book_download"
@@ -83,7 +83,7 @@
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Download"
-                    android:textColor="#fff" />
+                    android:textColor="#000" />
             </LinearLayout>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

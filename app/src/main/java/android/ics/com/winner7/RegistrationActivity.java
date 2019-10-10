@@ -110,7 +110,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("http://ihisaab.in/winnerseven/api/ragistration");
+                URL url = new URL("https://winner7quiz.com/api/ragistration");
 
 
                 JSONObject postDataParams = new JSONObject();
